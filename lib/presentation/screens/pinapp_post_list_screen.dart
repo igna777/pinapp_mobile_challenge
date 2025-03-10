@@ -15,37 +15,38 @@ class PinAppPostListScreen extends StatelessWidget {
         backgroundColor: PinappColors.primary,
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-        child: Column(
-          children: [
-            PostSearchBar(onSearch: (query) {
-              context.read<PostBloc>().add(FilterPosts(query: query));
-            }),
-            Expanded(
-              child: BlocBuilder<PostBloc, PostState>(
-                builder: (context, state) {
-                  if (state is PostLoading) {
-                    return const Center(
-                        child: CircularProgressIndicator(
-                      backgroundColor: PinappColors.primary,
-                      color: PinappColors.accent,
-                    ));
-                  } else if (state is PostLoaded) {
-                    if (state.posts.isEmpty) {
-                      return const NoResultsWidget(); //No hay resultados
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+          child: Column(
+            children: [
+              PostSearchBar(onSearch: (query) {
+                context.read<PostBloc>().add(FilterPosts(query: query));
+              }),
+              Expanded(
+                child: BlocBuilder<PostBloc, PostState>(
+                  builder: (context, state) {
+                    if (state is PostLoading) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        backgroundColor: PinappColors.primary,
+                        color: PinappColors.accent,
+                      ));
+                    } else if (state is PostLoaded) {
+                      if (state.posts.isEmpty) {
+                        return const NoResultsWidget(); //No hay resultados
+                      }
+                      return PostList(posts: state.posts);
+                    } else if (state is PostError) {
+                      return Center(child: Text("${PinappStrings.error} ${state.message}"));
+                    } else {
+                      return const Center(child: Text(PinappStrings.noPosts));
                     }
-                    return PostList(posts: state.posts);
-                  } else if (state is PostError) {
-                    return Center(
-                        child: Text("${PinappStrings.error} ${state.message}"));
-                  } else {
-                    return const Center(child: Text(PinappStrings.noPosts));
-                  }
-                },
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
