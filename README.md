@@ -1,7 +1,3 @@
-Claro, te dejo un **README** más completo y profesional para el proyecto:
-
----
-
 # 📌 PinApp Challenge
 
 **PinApp Challenge** es una aplicación desarrollada en **Flutter** como parte de un reto técnico. Implementa **BLoC** para la gestión del estado, consume una API externa para obtener posts y comentarios, y permite a los usuarios realizar búsquedas y marcar favoritos. 🚀
