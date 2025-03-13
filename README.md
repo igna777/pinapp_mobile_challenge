@@ -81,7 +81,6 @@ La API utilizada es [`jsonplaceholder.typicode.com`](https://jsonplaceholder.typ
 - [ ] Persistencia de favoritos (local storage)
 - [ ] Modo oscuro
 - [ ] Tests de integración
-- [ ] Soporte para iOS
 
 ---
 
